@@ -53,7 +53,6 @@ coverage.xml
 *.pot
 
 # Django stuff:
-static/
 
 # Sphinx documentation
 docs/_build/
