@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import View
+from django.views.generic import DetailView, ListView
 
 
 class HomeView(View):
@@ -153,12 +154,6 @@ class Ecom_Product_OrderView(View):
         return render(request, 'ecom/ecom-product-order.html')
     
 
-class Edit_ProfileView(View):
-    def get(self, request):
-        
-        return render(request, 'edit-profile.html')
-    
-
 class Email_ComposeView(View):
     def get(self, request):
         
@@ -211,3 +206,15 @@ class Form_WizardView(View):
     def get(self, request):
         
         return render(request, 'forms/form-wizard.html')
+    
+
+class UserView(View):
+    def get(self, request):
+        
+        return render(request, 'user.html')  
+    
+
+class Edit_ProfileView(View):
+    def get(self, request):
+        
+        return render(request, 'edit-profile.html')
