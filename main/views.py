@@ -6,31 +6,31 @@ from django.views.generic import DetailView, ListView
 class HomeView(View):
     def get(self, request):
 
-        return render(request, 'index.html')
+        return render(request, 'home/index.html')
     
 
 class Home2View(View):
     def get(self, request):
         
-        return render(request, 'index2.html')
+        return render(request, 'home/index2.html')
     
 
 class Home3View(View):
     def get(self, request):
         
-        return render(request, 'index3.html')
+        return render(request, 'home/index3.html')
     
 
 class Home4View(View):
     def get(self, request):
         
-        return render(request, 'index4.html')
+        return render(request, 'home/index4.html')
     
 
 class Home5View(View):
     def get(self, request):
         
-        return render(request, 'index5.html')
+        return render(request, 'home/index5.html')
     
 
 class AnalyticsView(View):
