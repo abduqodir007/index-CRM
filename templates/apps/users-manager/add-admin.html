@@ -36,53 +36,34 @@
 			<div class="container-fluid">
 				<!-- row -->
 				<div class="row">
-					<div class="col-xl-3 col-lg-4">
-						<div class="clearfix">
-							<div class="card card-bx profile-card author-profile m-b30">
-								<div class="card-body">
-									<div class="p-5">
-										<div class="author-profile">
-											<div class="author-media">
-												<img src="/static/images/user.jpg" alt="">
-												<div class="upload-link" title="" data-toggle="tooltip" data-placement="right" data-original-title="update">
-													<input type="file" class="update-flie">
-													<i class="fa fa-camera"></i>
-												</div>
-											</div>
-											<div class="author-info">
-												<h6 class="title">Nella Vita</h6>
-												<span>Developer</span>
-											</div>
-										</div>
-									</div>
-							
-								</div>
-								
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-9 col-lg-8">
+					
+					<div class="col-xl-12 col-lg-12">
 						<div class="card profile-card card-bx m-b30">
 							<div class="card-header">
 								<h6 class="title">Account setup</h6>
 							</div>
-							<form class="profile-form">
+							<form class="profile-form" method="POST" enctype="multipart/form-data" action="{% url 'main:add_user-create' %}">
                                 {% csrf_token %}
+
 
 								<div class="card-body">
 									<div class="row">
 										<div class="col-sm-6 m-b30">
+											<label class="form-label">Profil Rasm</label>
+											<input type="file" class="form-control" name="profile_image">
+										</div>
+										<div class="col-sm-6 m-b30">
 											<label class="form-label">ismi</label>
-											<input type="text" class="form-control" value="John">
+											<input type="text" class="form-control" value="John" name="name">
 										</div>
 										<div class="col-sm-6 m-b30">
 											<label class="form-label">Familiyasi</label>
-											<input type="text" class="form-control">
+											<input type="text" class="form-control" value="Couter" name="surname">
 										</div>
 										
 										<div class="col-sm-6 m-b30">
 											<label class="form-label">Jinsi</label>
-											<select class="default-select form-control" id="validationCustom05">
+											<select class="default-select form-control" id="validationCustom05" name="gender">
 												<option  data-display="Select">Please select</option>
 												<option value="html">Erkak</option>
 												<option value="css">Ayol</option>
@@ -91,19 +72,19 @@
 										</div>
 										<div class="col-sm-6 m-b30">
 											<label class="form-label">Tug'ilgan kuni</label>
-											<input type="date" class="form-control">
+											<input type="date" class="form-control" name="birth_date">
 										</div>
 										<div class="col-sm-6 m-b30">
 											<label class="form-label">Telefon Raqami</label>
-											<input type="text" class="form-control" value="+123456789">
+											<input type="text" class="form-control" value="+123456789" name="phone_number">
 										</div>
 										<div class="col-sm-6 m-b30">
 											<label class="form-label">Email Adresi</label>
-											<input type="text" class="form-control" value="demo@gmail.com">
+											<input type="text" class="form-control" value="demo@gmail.com" name="email">
 										</div>
 										<div class="col-sm-6 m-b30">
 											<label class="form-label">Viloyati</label>
-											<select class="default-select form-control" id="validationCustom01">
+											<select class="default-select form-control" id="validationCustom01" name="region">
 												<option  data-display="Select">Please select</option>
 												<option value="russia">Andijon</option>
 												<option value="canada">Namangan</option>
@@ -113,7 +94,7 @@
 										</div>
 										<div class="col-sm-6 m-b30">
 											<label class="form-label">Shahar yoki Tumani</label>
-											<select class="default-select form-control" id="validationCustom02">
+											<select class="default-select form-control" id="validationCustom02" name="city_or_district">
 												<option  data-display="Select">Please select</option>
 												<option>Andijon Shahar</option>
 												<option>Andijon Tuman</option>
@@ -127,6 +108,7 @@
 									<button class="btn btn-primary">Qo'shish</button>
 									<a href="page-register.html" class="btn-link">Forgot your password?</a>
 								</div>
+
 							</form>
 						</div>
 					</div>

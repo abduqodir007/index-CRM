@@ -8,7 +8,7 @@ from .forms import Add_UserForm
 class Add_UserListView(ListView):
     model = Users
     template_name = "apps/users-manager/user.html"
-    context_object_name = "objects"
+    context_object_name = "users"
     queryset = model.objects.all().order_by("-id")
     paginate_by = 10
 
@@ -29,14 +29,16 @@ class Add_UserCreateView(CreateView):
     success_url = "main:add_user-list"
     success_create_url = "main:add_user-create"
 
+    
+
 
 class Add_UserUdateView(UpdateView):
     model = Users
-    template_name = "panel/add_user/update.html"
+    template_name = "apps/users-manager/add-admin.html"
     form_class = Add_UserForm
     context_object_name = "object"
-    success_url = "panel:add_user-list"
-    success_update_url = "panel:add_user-update"
+    success_url = "main:add_user-list"
+    success_create_url = "main:add_user-update"
 
 class Add_UserDeleteView(DeleteView):
     model = Users

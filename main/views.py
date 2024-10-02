@@ -212,16 +212,4 @@ class Form_WizardView(View):
         return render(request, 'forms/form-wizard.html')
     
 
-class UserListView(ListView):
-    queryset = models.Users.objects.all()
-    template_name = 'apps/users-manager/user.html'
-    context_object_name = "users"
-    paginate_by = 10
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        
-        context["users"] = models.Users.objects.all()
-
-        return context
 

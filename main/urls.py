@@ -30,7 +30,6 @@ urlpatterns = [
         path("ecom-product-grid/", views.Ecom_Product_GridView.as_view(), name="ecom-product-grid"),
         path("ecom-product-list/", views.Ecom_Product_ListView.as_view(), name="ecom-product-list"),
         path("ecom-product-order/", views.Ecom_Product_OrderView.as_view(), name="ecom-product-order"),
-        # path("edit-profile/", views.Edit_ProfileView.as_view(), name="edit-profile"),
         path("email-compose/", views.Email_ComposeView.as_view(), name="email-compose"),
         path("email-inbox/", views.Email_InboxView.as_view(), name="email-inbox"),
         path("email-read/", views.Email_ReadView.as_view(), name="email-read"),
@@ -40,7 +39,6 @@ urlpatterns = [
         path("form-pickers/", views.Form_PickersView.as_view(), name="form-pickers"),
         path("form-validation/", views.Form_ValidationView.as_view(), name="form-validation"),
         path("form-wizard/", views.Form_WizardView.as_view(), name="form-wizard"),
-        path("users/", views.UserListView.as_view(), name="users"),
 
-        path("user/", include("main.user.urls")),
+        path("users/", include("main.user.urls")),
 ]
