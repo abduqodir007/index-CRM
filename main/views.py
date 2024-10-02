@@ -1,42 +1,56 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import DetailView, ListView
+# from .forms import UserForm
+
+from main import models
+
 
 
 class HomeView(View):
     def get(self, request):
 
-        return render(request, 'home/index.html')
+        return render(request, 'dashboard/index.html')
     
 
 class Home2View(View):
     def get(self, request):
         
-        return render(request, 'home/index2.html')
+        return render(request, 'dashboard/index2.html')
     
 
 class Home3View(View):
     def get(self, request):
         
-        return render(request, 'home/index3.html')
+        return render(request, 'dashboard/index3.html')
     
 
 class Home4View(View):
     def get(self, request):
         
-        return render(request, 'home/index4.html')
+        return render(request, 'dashboard/index4.html')
     
 
 class Home5View(View):
     def get(self, request):
         
-        return render(request, 'home/index5.html')
+        return render(request, 'dashboard/index5.html')
     
+class Blog(View):
+    def get(self, request):
+        
+        return render(request, 'dashboard/blog.html')
 
 class AnalyticsView(View):
     def get(self, request):
         
-        return render(request, 'analytics.html')
+        return render(request, 'dashboard/analytics.html')
+    
+
+class CrmView(View):
+    def get(self, request):
+        
+        return render(request, 'crm.html')
     
 
 class App_CalenderView(View):
@@ -49,18 +63,6 @@ class App_Profile_1(View):
     def get(self, request):
         
         return render(request, 'app-profile-1.html')
-    
-
-class App_Profile_2(View):
-    def get(self, request):
-        
-        return render(request, 'app-profile-2.html')
-    
-
-class Blog(View):
-    def get(self, request):
-        
-        return render(request, 'blog.html')
     
 
 class Chart_chartist(View):
@@ -105,10 +107,12 @@ class Chatview(View):
         return render(request, 'chat.html')
     
 
-class CrmView(View):
+    
+
+class App_Profile_2(View):
     def get(self, request):
         
-        return render(request, 'crm.html')
+        return render(request, 'app-profile-2.html')
     
 
 class Ecom_CheckoutView(View):
@@ -208,13 +212,16 @@ class Form_WizardView(View):
         return render(request, 'forms/form-wizard.html')
     
 
-class UserView(View):
-    def get(self, request):
-        
-        return render(request, 'user.html')  
-    
+class UserListView(ListView):
+    queryset = models.Users.objects.all()
+    template_name = 'apps/users-manager/user.html'
+    context_object_name = "users"
+    paginate_by = 10
 
-class Edit_ProfileView(View):
-    def get(self, request):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         
-        return render(request, 'apps/users-manager/edit-profile.html')
+        context["users"] = models.Users.objects.all()
+
+        return context
+
