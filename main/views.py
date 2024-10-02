@@ -217,4 +217,4 @@ class UserView(View):
 class Edit_ProfileView(View):
     def get(self, request):
         
-        return render(request, 'edit-profile.html')
+        return render(request, 'apps/users-manager/edit-profile.html')
