@@ -22,7 +22,7 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-		{% include 'sidebar.html' %}
+		{% include 'sidebar.html' with menu_parent="user" menu_submenu="user-create" %}
 
         <!--**********************************
             Sidebar end
@@ -42,16 +42,11 @@
 							<div class="card-header">
 								<h6 class="title">Account setup</h6>
 							</div>
-							<form class="profile-form" method="POST" enctype="multipart/form-data" action="{% url 'main:add_user-create' %}">
+							<form class="profile-form" method="post" enctype="multipart/form-data" action="">
                                 {% csrf_token %}
-
 
 								<div class="card-body">
 									<div class="row">
-										<div class="col-sm-6 m-b30">
-											<label class="form-label">Profil Rasm</label>
-											<input type="file" class="form-control" name="profile_image">
-										</div>
 										<div class="col-sm-6 m-b30">
 											<label class="form-label">ismi</label>
 											<input type="text" class="form-control" value="John" name="name">
@@ -102,13 +97,44 @@
 												<option>Ontin Ko'l Tumani</option>
 											</select>
 										</div>
+										<div class="col-sm-6 m-b30">
+											<label class="form-label">Profil Rasm</label>
+											<input type="file" class="form-control" name="profile_image">
+										</div>
 									</div>
 								</div>
-								<div class="card-footer">
-									<button class="btn btn-primary">Qo'shish</button>
-									<a href="page-register.html" class="btn-link">Forgot your password?</a>
-								</div>
+								
 
+
+
+								<div class="tab-content main-editor">
+									<div class="card-body">
+										<div class="row">
+											{% for field in form %}
+											<div class="col-sm-6 m-b30">
+	
+												<label class="form-label" for="{{field.auto_id}}">
+													{% if field.field.required %}
+													<b>{{field.label}}</b>
+													{% else %}
+													{{field.label}}
+													{% endif %}
+												</label>
+												<div class="col-lg-9 col-md-9 col-sm-12">
+													
+													<span style="color:red;">{{field.errors}}</span>
+													
+													{{field}}
+												</div>
+											</div>
+											{% endfor %}
+										</div>
+
+
+										<div class="card-footer">
+											<button type="submit" class="btn btn-primary" name="save-create">Qo'shish</button>
+											<a href="page-register.html" class="btn-link">Forgot your password?</a>
+										</div>
 							</form>
 						</div>
 					</div>

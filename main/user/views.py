@@ -16,7 +16,7 @@ class Add_UserListView(ListView):
         object_list = self.queryset
         search = self.request.GET.get("search", None)
         if search:
-            object_list = object_list.filter(title__icontains=search)
+            object_list = object_list.filter(name__icontains=search)
 
         return object_list
 
@@ -28,7 +28,7 @@ class Add_UserCreateView(CreateView):
     context_object_name = "object"
     success_url = "main:add_user-list"
     success_create_url = "main:add_user-create"
-
+    
     
 
 
