@@ -13,16 +13,16 @@
 						</a>
 						<ul aria-expanded="false">
 							
-							<li><a href="index.html">Dashboard Light</a></li>
-							<li><a href="index-2.html">Dashboard Dark</a></li>
-							<li><a href="index-3.html">Dashboard 2</a></li>
-							<li><a href="index-4.html">Dashboard 3</a></li>
-							<li><a href="index-5.html">Dashboard 4</a></li>
-							<li><a href="crm.html">CRM</a></li>
-							<li><a href="analytics.html">Analytics</a></li>
-							<li><a href="products.html">Products</a></li>
-							<li><a href="sales.html">Sales</a></li>
-							<li><a href="blog.html">Blog</a></li>
+							<li><a href="{% url 'main:home' %}">Dashboard Light</a></li>
+							<li><a href="{% url 'main:home2' %}">Dashboard Dark</a></li>
+							<li><a href="{% url 'main:home3' %}">Dashboard 2</a></li>
+							<li><a href="{% url 'main:home4' %}">Dashboard 3</a></li>
+							<li><a href="{% url 'main:home5' %}">Dashboard 4</a></li>
+							<li><a href="{% url 'main:crm' %}">CRM</a></li>
+							<li><a href="{% url 'main:analytics' %}">Analytics</a></li>
+							<li><a href="{% url 'main:products' %}">Products</a></li>
+							<li><a href="{% url 'main:sales' %}">Sales</a></li>
+							<li><a href="{% url 'main:blog' %}">Blog</a></li>
 						</ul>
 					</li>
 					<li><a href="task.html" class="" aria-expanded="false">
@@ -78,30 +78,28 @@
 							<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">Users Manager<span class="badge badge-danger badge-xs ms-1">NEW</span></a>
 								<ul aria-expanded="false">
 									<li><a href="{% url 'main:add_user-list' %}">User</a></li>
-									<li><a href="{% url 'main:add_user-create' %}">Add Admin</a></li>
-									<li><a href="./app-profile-1.html">Profile 1</a></li>
-									<li><a href="./app-profile-2.html">Profile 2 <span class="badge badge-danger badge-xs ms-1">NEW</span></a></li>
-									<li><a href="./edit-profile.html">Edit Profile</a></li>
+									<li><a href="{% url 'main:app-profile1' %}">Profile 1</a></li>
+									<li><a href="{% url 'main:app-profile2' %}">Profile 2 <span class="badge badge-danger badge-xs ms-1">NEW</span></a></li>
 									<li><a href="./post-details.html">Post Details</a></li>
 								</ul>
 							</li>
 							<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">Email</a>
 								<ul aria-expanded="false">
-									<li><a href="./email-compose.html">Compose</a></li>
-									<li><a href="./email-inbox.html">Inbox</a></li>
-									<li><a href="./email-read.html">Read</a></li>
+									<li><a href="{% url 'main:email-compose' %}">Compose</a></li>
+									<li><a href="{% url 'main:email-inbox' %}">Inbox</a></li>
+									<li><a href="{% url 'main:email-read' %}">Read</a></li>
 								</ul>
 							</li>
-							<li><a href="./app-calender.html">Calendar</a></li>
+							<li><a href="{% url 'main:app-calendar' %}">Calendar</a></li>
 							<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">Shop</a>
 								<ul aria-expanded="false">
-									<li><a href="./ecom-product-grid.html">Product Grid</a></li>
-									<li><a href="./ecom-product-list.html">Product List</a></li>
-									<li><a href="./ecom-product-detail.html">Product Details</a></li>
-									<li><a href="./ecom-product-order.html">Order</a></li>
-									<li><a href="./ecom-checkout.html">Checkout</a></li>
-									<li><a href="./ecom-invoice.html">Invoice</a></li>
-									<li><a href="./ecom-customers.html">Customers</a></li>
+									<li><a href="{% url 'main:ecom-product-grid' %}">Product Grid</a></li>
+									<li><a href="{% url 'main:ecom-product-list' %}">Product List</a></li>
+									<li><a href="{% url 'main:ecom-product-detail' %}">Product Details</a></li>
+									<li><a href="{% url 'main:ecom-product-order' %}">Order</a></li>
+									<li><a href="{% url 'main:ecom-checkout' %}">Checkout</a></li>
+									<li><a href="{% url 'main:ecom-invoice' %}">Invoice</a></li>
+									<li><a href="{% url 'main:ecom-customers' %}">Customers</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -118,12 +116,12 @@
 							<span class="nav-text">Charts</span>
 						</a>
 						<ul aria-expanded="false">
-							<li><a href="./chart-flot.html">Flot</a></li>
-							<li><a href="./chart-morris.html">Morris</a></li>
-							<li><a href="./chart-chartjs.html">Chartjs</a></li>
-							<li><a href="./chart-chartist.html">Chartist</a></li>
-							<li><a href="./chart-sparkline.html">Sparkline</a></li>
-							<li><a href="./chart-peity.html">Peity</a></li>
+							<li><a href="{% url 'main:chart-flot' %}">Flot</a></li>
+							<li><a href="{% url 'main:chart-morris' %}">Morris</a></li>
+							<li><a href="{% url 'main:chart-chartjs' %}">Chartjs</a></li>
+							<li><a href="{% url 'main:chart-chartist' %}">Chartist</a></li>
+							<li><a href="{% url 'main:chart-sparkline' %}">Sparkline</a></li>
+							<li><a href="{% url 'main:chart-peity' %}">Peity</a></li>
 						</ul>
 					</li>
 					<li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
@@ -216,11 +214,11 @@
 							<span class="nav-text">Forms</span>
 						</a>
 						<ul aria-expanded="false">
-							<li><a href="./form-element.html">Form Elements</a></li>
-							<li><a href="./form-wizard.html">Wizard</a></li>
-							<li><a href="./form-ckeditor.html">CkEditor</a></li>
-							<li><a href="form-pickers.html">Pickers</a></li>
-							<li><a href="form-validation.html">Form Validate</a></li>
+							<li><a href="{% url 'main:form-element' %}">Form Elements</a></li>
+							<li><a href="{% url 'main:form-wizard' %}">Wizard</a></li>
+							<li><a href="{% url 'main:form-ckeditor' %}">CkEditor</a></li>
+							<li><a href="{% url 'main:form-pickers' %}">Pickers</a></li>
+							<li><a href="{% url 'main:form-validation' %}">Form Validate</a></li>
 						</ul>
 					</li>
 					<li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
@@ -266,7 +264,7 @@
 								</ul>
 							</li>
 							<li><a href="./page-lock-screen.html">Lock Screen</a></li>
-							<li><a href="./empty-page.html">Empty Page</a></li>
+							<li><a href="{% url 'main:empty-page' %}">Empty Page</a></li>
 						</ul>
 					</li>
 				</ul>

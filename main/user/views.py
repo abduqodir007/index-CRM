@@ -30,17 +30,16 @@ class Add_UserCreateView(CreateView):
     success_create_url = "main:add_user-create"
     
     
-
-
 class Add_UserUdateView(UpdateView):
     model = Users
-    template_name = "apps/users-manager/add-admin.html"
+    template_name = "apps/users-manager/edit-admin.html"
     form_class = Add_UserForm
     context_object_name = "object"
     success_url = "main:add_user-list"
     success_create_url = "main:add_user-update"
 
+
 class Add_UserDeleteView(DeleteView):
     model = Users
-    success_url = "panel:add_user-list"
+    success_url = "main:add_user-list"
 

@@ -98,7 +98,7 @@
 												</li>
 											</ul>
 											<div>
-												<a href="javascript:void(0)" class="btn btn-primary btn-sm me-2">O'zgartirish</a>
+												<a href="{% url 'main:add_user-update' user.pk %}" class="btn btn-primary btn-sm me-2">O'zgartirish</a>
 											</div>	
 										</div>
 									</div>
@@ -138,8 +138,8 @@
 															</svg>
 														</div>
 														<div class="dropdown-menu dropdown-menu-right" style="">
-															<a class="dropdown-item" href="javascript:void(0);">O'zgartirish</a>
-															<a class="dropdown-item" href="javascript:void(0);">O'chirish</a>
+															<a class="dropdown-item" href="{% url 'main:add_user-update' user.pk %}">O'zgartirish</a>
+															<a class="dropdown-item" href="{% url 'main:add_user-delete' user.pk %}">O'chirish</a>
 														</div>
 													</div>
 												</td>

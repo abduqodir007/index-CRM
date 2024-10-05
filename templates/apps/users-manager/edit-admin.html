@@ -22,7 +22,7 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-		{% include 'sidebar.html' with menu_parent="user" menu_submenu="user-create" %}
+		{% include 'sidebar.html' with menu_parent="user" menu_submenu="add_user-update" %}
 
         <!--**********************************
             Sidebar end
@@ -42,7 +42,7 @@
 							<div class="card-header">
 								<h6 class="title">Account setup</h6>
 							</div>
-							<form class="profile-form" method="post" enctype="multipart/form-data" action="{% url 'main:add_user-create' %}">
+							<form class="profile-form" method="post" enctype="multipart/form-data" action="">
                                 {% csrf_token %}
 
 								<div class="card-body">
@@ -70,7 +70,7 @@
 
 
 									<div class="card-footer">
-										<button type="submit" class="btn btn-primary" name="saved">Qo'shish</button>
+										<button type="submit" class="btn btn-primary" name="saved">Saqlash</button>
 										<a href="{% url 'main:add_user-list' %}" class="btn-link">Ortga Qaytish</a>
 									</div>
 							</form>

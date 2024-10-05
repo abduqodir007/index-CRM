@@ -53,6 +53,8 @@ coverage.xml
 *.pot
 
 # Django stuff:
+static/
+
 
 # Sphinx documentation
 docs/_build/
@@ -276,7 +278,7 @@ local_settings.py
 db.sqlite3
 
 argos-academy/media/
-mediafiles/
+media/
 .pytest_cache/
 
 celerybeat-schedule.*
