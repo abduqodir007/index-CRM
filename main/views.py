@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import DetailView, ListView
 from main import models
+from django.db.models import Q, Count
+
 
 
 
@@ -51,16 +53,10 @@ class CrmView(View):
         return render(request, 'dashboard/crm.html')
     
 
-class ProductsView(View):
-    def get(self, request):
+# class ProductsView(View):
+#     def get(self, request):
         
-        return render(request, 'dashboard/products.html')
-    
-
-class Add_ProductsView(View):
-    def get(self, request):
-        
-        return render(request, 'add_product.html')
+#         return render(request, 'dashboard/products.html')
     
 
 class SalesView(View):
@@ -147,39 +143,28 @@ class Ecom_InvoiceView(View):
         
         return render(request, 'apps/shop/ecom-invoice.html')
     
-
-class Ecom_Product_DetailView(View):
-    def get(self, request):
-        
-        return render(request, 'apps/shopecom-product-detail.html')
     
+class Ecom_Product_DetailView(DetailView):
+    queryset = models.Product.objects.all()
+    slug_field = "slug"
+    context_object_name = "object"
+    template_name = 'apps/shop/product/ecom-product-detail.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
 
+        context["related_projects"] = models.Product.objects.filter(
+                ~Q(slug=self.kwargs["slug"]), categories__in=self.get_object().categories.all()
+                )[:4]
+
+        return context
+
+    
 class Ecom_Product_GridView(View):
     def get(self, request):
         
         return render(request, 'apps/shop/ecom-product-grid.html')
     
-
-class Ecom_Product_ListView(View):
-    def get(self, request):
-
-        
-        return render(request, 'apps/shop/ecom-product-list.html')
-
-class Ecom_Product_ListView(DetailView):
-    queryset = models.Product.objects.all()
-    slug_field = "slug"
-    context_object_name = "object"
-    template_name = "apps/shop/ecom-product-list.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        context["related_products"] = models.Product.objects.filter(
-                ~Q(slug=self.kwargs["slug"]), categories__in=self.get_object().categories.all()
-                )[:10]
-
-        return context    
 
 class Ecom_Product_OrderView(View):
     def get(self, request):

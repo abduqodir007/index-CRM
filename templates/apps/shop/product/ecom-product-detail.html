@@ -14,17 +14,13 @@
 		<!--**********************************
             Chat box End
         ***********************************-->
-
-
         <!--**********************************
             Header start
         ***********************************-->
-
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
 		{% include 'header.html' %}
-
         <!--**********************************
             Sidebar start
         ***********************************-->
@@ -32,7 +28,6 @@
         <!--**********************************
             Sidebar end
         ***********************************-->
-
         <!--**********************************
             Content body start
         ***********************************-->
@@ -48,16 +43,16 @@
                                         <!-- Tab panes -->
                                         <div class="tab-content" id="myTabContent">
 										  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-												 <img class="img-fluid rounded  " src="images/product/1.jpg" alt="">
+												 <img class="img-fluid rounded  " src="{{object.main_image.url}}" alt="">
 										  </div>
 										  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-												<img class="img-fluid rounded " src="images/product/2.jpg" alt="">
+												<img class="img-fluid rounded " src="{{object.main_image1.url}}" alt="">
 										  </div>
 										  <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-											 <img class="img-fluid rounded" src="images/product/3.jpg" alt="">
+											 <img class="img-fluid rounded" src="{{object.main_image2.url}}" alt="">
 										  </div>
 										  <div class="tab-pane fade" id="end-tab-pane" role="tabpanel" aria-labelledby="end-tab" tabindex="0">
-											 <img class="img-fluid rounded" src="images/product/3.jpg" alt="">
+											 <img class="img-fluid rounded" src="{{object.main_image3.url}}" alt="">
 										  </div>
 										  
 										</div>
@@ -65,16 +60,16 @@
                                             <!-- Nav tabs -->
                                             <ul class="nav nav-tabs slide-item-list mt-3" id="myTab" role="tablist">
 												  <li class="nav-item" role="presentation">
-													<a href="#first" class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"  role="tab" aria-controls="home-tab-pane" aria-selected="true"><img class="img-fluid me-2 rounded" src="images/tab/1.jpg" alt="" width="80"></a>
+													<a href="#first" class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"  role="tab" aria-controls="home-tab-pane" aria-selected="true"><img class="img-fluid me-2 rounded" src="{{object.main_image.url}}" alt="" width="80"></a>
 												  </li>
 												  <li class="nav-item" role="presentation">
-													<a href="#second" class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"  role="tab" aria-controls="profile-tab-pane" aria-selected="false"><img class="img-fluid me-2 rounded" src="images/tab/2.jpg" alt="" width="80"></a>
+													<a href="#second" class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"  role="tab" aria-controls="profile-tab-pane" aria-selected="false"><img class="img-fluid me-2 rounded" src="{{object.main_image1.url}}" alt="" width="80"></a>
 												  </li>
 												  <li class="nav-item" role="presentation">
-													<a href="#third" class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" role="tab" aria-controls="contact-tab-pane" aria-selected="false"><img class="img-fluid me-2 rounded" src="images/tab/3.jpg" alt="" width="80"></a>
+													<a href="#third" class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" role="tab" aria-controls="contact-tab-pane" aria-selected="false"><img class="img-fluid me-2 rounded" src="{{object.main_image2.url}}" alt="" width="80"></a>
 												  </li>
 												  <li class="nav-item" role="presentation">
-													<a href="#for" class="nav-link" id="end-tab" data-bs-toggle="tab" data-bs-target="#end-tab-pane"  role="tab" aria-controls="end-tab-pane" aria-selected="false"><img class="img-fluid  rounded" src="images/tab/4.jpg" alt="" width="80"></a>
+													<a href="#for" class="nav-link" id="end-tab" data-bs-toggle="tab" data-bs-target="#end-tab-pane"  role="tab" aria-controls="end-tab-pane" aria-selected="false"><img class="img-fluid  rounded" src="{{object.main_image3.url}}" alt="" width="80"></a>
 												  </li>
 										 
 											</ul>
@@ -85,66 +80,44 @@
                                         <div class="product-detail-content">
                                             <!--Product details-->
                                             <div class="new-arrival-content pr">
-                                                <h4>Solid Women's V-neck Dark T-Shirt</h4>
-                                                <div class="comment-review star-rating d-flex">
-													<ul>
-														<li><i class="fa fa-star"></i></li>
-														<li><i class="fa fa-star"></i></li>
-														<li><i class="fa fa-star"></i></li>
-														<li><i class="fa fa-star"></i></li>
-														<li><i class="fa fa-star"></i></li>
-													</ul>
-													<span class="review-text ms-3">(34 reviews) / </span><a class="product-review" href=""  data-bs-toggle="modal" data-bs-target="#reviewModal">Write a review?</a>
+                                                <h4>{{object.title}}</h4>
+                                                <div class="comment-review star-rating d-flex"> 
+													<span class="review-text ms-3">Mahsulot Soni-{{ object.product_count }} ta / </span><a class="product-review" href=""  data-bs-toggle="modal" data-bs-target="#reviewModal">Write a review?</a>
 												</div>
 												<div class="d-table mb-2">
-													<p class="price float-start d-block">$325.00</p>
+													<p class="price float-start d-block">{{object.price}} So'm</p>
                                                 </div>
-                                                <p>Availability: <span class="item"> In stock <i
+                                                <p>Availability: <span class="item">{{object.published_date}} <i
                                                             class="fa fa-shopping-basket"></i></span>
                                                 </p>
-                                                <p>Product code: <span class="item">0405689</span> </p>
-                                                <p>Brand: <span class="item">Lee</span></p>
+                                                <p>Product code: <span class="item">{{object.product_code}}</span> </p>
+                                                <p>Brand: <span class="item">{{object.brand}}</span></p>
                                                 <p>Product tags:&nbsp;&nbsp;
-                                                    <span class="badge badge-success light">bags</span>
-                                                    <span class="badge badge-success light">clothes</span>
-                                                    <span class="badge badge-success light">shoes</span>
-                                                    <span class="badge badge-success light">dresses</span>
+													{% for tag in object.tags.all %}
+                                                    <span class="badge badge-success light">{{tag.title}}</span>
+													{% endfor %}
+                                                    
                                                 </p>
-                                                <p class="text-content">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-                                                    If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
+                                                <p class="text-content">{{object.description}}</p>
 												<div class="d-flex align-items-end flex-wrap mt-4">
 													<div class="filtaring-area me-3">
 														<div class="size-filter">
 															<h4 class="m-b-15">Select size</h4>
-															<div class="d-flex select-size mb-2" role="group" aria-label="Basic radio toggle button group">
-															  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked>
-															  <label class="btn btn-outline-primary sharp sharp-lg" for="btnradio1">XS</label>
-
-															  <input type="radio" class="btn-check" name="btnradio" id="btnradio2">
-															  <label class="btn btn-outline-primary sharp sharp-lg" for="btnradio2">SM</label>
-
-															  <input type="radio" class="btn-check" name="btnradio" id="btnradio3">
-															  <label class="btn btn-outline-primary sharp sharp-lg" for="btnradio3">MD</label>
-															  
-															  <input type="radio" class="btn-check" name="btnradio" id="btnradio4">
-															  <label class="btn btn-outline-primary sharp sharp-lg" for="btnradio4">LG</label>
-															  
-															  <input type="radio" class="btn-check" name="btnradio" id="btnradio5">
-															  <label class="btn btn-outline-primary sharp sharp-lg" for="btnradio5">XL</label>
-															</div>
+															
 															
 														</div>
 													</div>
 													<!--Quantity start-->
+													
 													<div class="col-2 px-0  mb-1 me-3">
 														<input type="number" name="num" class="form-control input-btn input-number" value="1">
 													</div>
 													<!--Quanatity End-->
 													<div class="shopping-cart  mb-1 me-3">
-														<a class="btn btn-primary" href="javascript:void(0);;"><i
-																class="fa fa-shopping-basket me-2"></i>Add
-															to cart</a>
+														<a class="btn btn-primary" href="{% url 'main:product-sale' object.pk %}"><i
+																class="fa fa-shopping-basket me-2"></i>sotildi</a>
 													</div>
+
 												</div>
                                             </div>
                                         </div>

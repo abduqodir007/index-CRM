@@ -18,6 +18,6 @@ class Add_UserForm(forms.ModelForm):
             'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Telefon raqamingiz'}),
             'birth_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'region': forms.Select(attrs={'class': 'form-control'}, choices=[('', 'Tanlash')] + list(Users.REGION_CHOICES)),  # 'Tanlash' qo'shildi
-            'city_or_district': forms.Select(attrs={'class': 'form-control Select'}, choices=[('', 'Tanlash')] + list(Users.CITY_CHOICES)),  # 'Tanlash' qo'shildi
+            'city_or_district': forms.Select(attrs={'class': 'form-control'}, choices=[('', 'Tanlash')] + list(Users.CITY_CHOICES)),  # 'Tanlash' qo'shildi
             'profile_image': forms.FileInput(attrs={'class': 'form-control', 'type': 'file'})
         }

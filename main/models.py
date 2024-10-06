@@ -2,7 +2,7 @@ from django.db import models
 from django_resized import ResizedImageField
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-
+from django.utils.text import slugify
 
 
 class Users(models.Model):
@@ -66,7 +66,7 @@ class ProductTag(models.Model):
 
 class Product(models.Model):
     title = models.CharField(_("title"), max_length=256)
-    slug = models.SlugField(_("slug"), max_length=256)
+    slug = models.SlugField(_("slug"), unique=True, blank=True, null=True)
     description = models.TextField(_("description"))
     categories = models.ManyToManyField(ProductCategory, verbose_name=_("categories"), related_name="products")
     tags = models.ManyToManyField(ProductTag, related_name="products", verbose_name=_("tags"))
@@ -80,8 +80,13 @@ class Product(models.Model):
     published_date = models.DateField(_("published date"), auto_now_add=True)
     price = models.CharField(_("price"), max_length=256)
     brand = models.CharField(_("brand"), max_length=256)
-    Product_code = models.CharField(_("Product code"), max_length=256)
-    Product_qount = models.CharField(_("product qount"), max_length=100)
+    product_code = models.CharField(_("Product code"), max_length=256)
+    product_count = models.IntegerField(_("product count"), default=0)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+            super().save(*args, **kwargs)
     
     
     class Meta:

@@ -13,8 +13,7 @@ urlpatterns = [
         path("home5/", views.Home5View.as_view(), name="home5"),
         path("crm/", views.CrmView.as_view(), name="crm"),
         path("analytics/", views.AnalyticsView.as_view(), name="analytics"),
-        path("products/", views.ProductsView.as_view(), name="products"),
-        path("add_product/", views.Add_ProductsView.as_view(), name="add_product"),
+        # path("products/", views.ProductsView.as_view(), name="products"),
         path("sales/", views.SalesView.as_view(), name="sales"),
         path("blog/", views.Blog.as_view(), name="blog"),
         path("app-calendar/", views.App_CalendarView.as_view(), name="app-calendar"),
@@ -29,9 +28,7 @@ urlpatterns = [
         path("ecom-checkout/", views.Ecom_CheckoutView.as_view(), name="ecom-checkout"),
         path("ecom-custumers/", views.Ecom_CustomersView.as_view(), name="ecom-customers"),
         path("ecom-invoice/", views.Ecom_InvoiceView.as_view(), name="ecom-invoice"),
-        path("ecom-product-detail/", views.Ecom_Product_DetailView.as_view(), name="ecom-product-detail"),
         path("ecom-product-grid/", views.Ecom_Product_GridView.as_view(), name="ecom-product-grid"),
-        path("ecom-product-list/", views.Ecom_Product_ListView.as_view(), name="ecom-product-list"),
         path("ecom-product-order/", views.Ecom_Product_OrderView.as_view(), name="ecom-product-order"),
         path("email-compose/", views.Email_ComposeView.as_view(), name="email-compose"),
         path("email-inbox/", views.Email_InboxView.as_view(), name="email-inbox"),
@@ -44,4 +41,7 @@ urlpatterns = [
         path("form-wizard/", views.Form_WizardView.as_view(), name="form-wizard"),
 
         path("users/", include("main.user.urls")),
+        path("product/", include("main.product.urls")),
+        path("category-tag/", include("main.category-tag.urls")),
+        path("ecom-product-detail/<slug:slug>/", views.Ecom_Product_DetailView.as_view(), name="ecom-product-detail"),
 ]
