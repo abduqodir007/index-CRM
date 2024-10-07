@@ -8,7 +8,7 @@ class ProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ['title', 'product_code', 'categories', 'tags', 'small_image', 'main_image', 'main_image1', 'main_image2', 'main_image3', 'main_image4', 'price', 'brand', 'product_count', 'is_top', 'description']
+        fields = ['title', 'product_code', 'categories', 'tags', 'main_image', 'main_image1', 'main_image2', 'main_image3', 'price', 'brand', 'product_count', 'is_top', 'description']
         
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Mahsulot nomini kiriting'}),
@@ -17,12 +17,10 @@ class ProductForm(forms.ModelForm):
             "price": forms.TextInput(attrs={"class": "form-control form-label",'placeholder': 'Mahsulot Narxini yozing'}),
             "brand": forms.TextInput(attrs={"class": "form-control form-label",'placeholder': 'Mahsulot Brandi yozing'}),
             'product_code': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mahsulot Shetirif kodi'}),
-            'small_image': forms.FileInput(attrs={'class': 'form-control ', 'type': 'file'}),
             'main_image': forms.FileInput(attrs={'class': 'form-control', 'type': 'file'}),
             'main_image1': forms.FileInput(attrs={'class': 'form-control', 'type': 'file'}),
             'main_image2': forms.FileInput(attrs={'class': 'form-control', 'type': 'file'}),
             'main_image3': forms.FileInput(attrs={'class': 'form-control', 'type': 'file'}),
-            'main_image4': forms.FileInput(attrs={'class': 'form-control', 'type': 'file'}),
             'is_top': forms.CheckboxInput(attrs={'class': 'form-checkbox'}),
             'product_count': forms.NumberInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control','placeholder': 'Mahsulot Haqida Malumot kiriting'}),

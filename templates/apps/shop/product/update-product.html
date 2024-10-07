@@ -14,7 +14,6 @@
             Header start
         ***********************************-->
 		{% include 'header.html' %}
-        
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -40,7 +39,7 @@
 					<div class="col-xl-12 col-lg-12">
 						<div class="card profile-card card-bx m-b30">
 							<div class="card-header">
-								<h6 class="title">Account setup</h6>
+								<h6 class="title">Product Update</h6>
 							</div>
 							<form class="profile-form" method="post" enctype="multipart/form-data" action="">
 								{% csrf_token %}
@@ -66,9 +65,7 @@
 
 								<div class="card-footer">
 								  <button type="submit" class="btn btn-primary" name="saved">Saqlash</button>
-									<a href="{% url 'main:category-create' %}" class="btn btn-success btn sweet-success ">Kategoriyalar</a>
-									<a href="{% url 'main:tag-create' %}" class="btn btn-success btn sweet-success">Taglar</a>
-								  <a href="{% url 'main:product-list' %}" class="btn-link">Ortga Qaytish</a>
+									<a href="{% url 'main:product-list' %}" class="btn-link">Ortga Qaytish</a>
 								</div>
 							  </form>
 						</div>

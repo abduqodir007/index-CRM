@@ -1,4 +1,6 @@
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView
+from helpers.views import  DeleteView
+
 from django.shortcuts import redirect, get_object_or_404
 from main.models import Product
 from django.urls import reverse_lazy, reverse
@@ -26,22 +28,24 @@ class ProductCreateView(CreateView):
     context_object_name = "object"
     success_url = reverse_lazy("main:product-list")
 
+
                 
 class ProductUpdateView(UpdateView):
     model = Product
-    form_class = ProductForm
     template_name = "apps/shop/product/update-product.html"
-    context_object_name = "object"
-    success_url = reverse_lazy("main:product-list") 
-        
-    def form_valid(self, form):
-        # Bu yerda formani tekshirish va saqlashga ishonch hosil qilish
-        print("Forma to'g'ri ishladi")
-        return super().form_valid(form)
+    form_class = ProductForm
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    
+    def get_success_url(self):
+        return reverse_lazy('main:product-update', kwargs={'slug': self.object.slug})
 
 class ProductDeleteView(DeleteView):
     model = Product
-    success_url = reverse_lazy("main:product-list")
+    template_name = 'main/product_confirm_delete.html'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    success_url = reverse_lazy('product-list')
 
 
 def product_sale(request, pk):
