@@ -29,7 +29,6 @@ urlpatterns = [
         path("ecom-custumers/", views.Ecom_CustomersView.as_view(), name="ecom-customers"),
         path("ecom-invoice/", views.Ecom_InvoiceView.as_view(), name="ecom-invoice"),
         path("ecom-product-grid/", views.Ecom_Product_GridView.as_view(), name="ecom-product-grid"),
-        path("ecom-product-order/", views.Ecom_Product_OrderView.as_view(), name="ecom-product-order"),
         path("email-compose/", views.Email_ComposeView.as_view(), name="email-compose"),
         path("email-inbox/", views.Email_InboxView.as_view(), name="email-inbox"),
         path("email-read/", views.Email_ReadView.as_view(), name="email-read"),

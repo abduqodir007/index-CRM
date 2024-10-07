@@ -4,7 +4,6 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.utils.text import slugify
 
-
 class Users(models.Model):
     GENDER_CHOICES = [
         ('Erkak', 'Erkak'),
@@ -40,7 +39,6 @@ class Users(models.Model):
         return f"{self.name}"
     
 
-
 class ProductCategory(models.Model):
     title = models.CharField(_("title"), max_length=256)
 
@@ -70,24 +68,21 @@ class Product(models.Model):
     description = models.TextField(_("description"))
     categories = models.ManyToManyField(ProductCategory, verbose_name=_("categories"), related_name="products")
     tags = models.ManyToManyField(ProductTag, related_name="products", verbose_name=_("tags"))
-    small_image = ResizedImageField(_("image small"), size=[50, 50], quality=95, crop=["middle", "center"], upload_to="products/%Y/%m")
-    main_image = ResizedImageField(_("image main"), size=[545, 621], quality=95, crop=["middle", "center"], upload_to="products/%Y/%m")
-    main_image1 = ResizedImageField(_("image main"), size=[545, 621], quality=95, crop=["middle", "center"], upload_to="products/%Y/%m")
-    main_image2 = ResizedImageField(_("image main"), size=[545, 621], quality=95, crop=["middle", "center"], upload_to="products/%Y/%m")
-    main_image3 = ResizedImageField(_("image main"), size=[545, 621], quality=95, crop=["middle", "center"], upload_to="products/%Y/%m")
-    main_image4 = ResizedImageField(_("image main"), size=[545, 621], quality=95, crop=["middle", "center"], upload_to="products/%Y/%m")
+    main_image = ResizedImageField(_("1-Rasm"), size=[545, 621], quality=95, crop=["middle", "center"], upload_to="products/%Y/%m")
+    main_image1 = ResizedImageField(_("2-Rasm"), size=[545, 621], quality=95, crop=["middle", "center"], upload_to="products/%Y/%m")
+    main_image2 = ResizedImageField(_("3-Rasm"), size=[545, 621], quality=95, crop=["middle", "center"], upload_to="products/%Y/%m")
+    main_image3 = ResizedImageField(_("4-Rasm"), size=[545, 621], quality=95, crop=["middle", "center"], upload_to="products/%Y/%m")
     is_top = models.BooleanField(_("project is top"), default=False)
     published_date = models.DateField(_("published date"), auto_now_add=True)
-    price = models.CharField(_("price"), max_length=256)
+    price = models.DecimalField(_("Narhi"), max_digits=10, decimal_places=2)
     brand = models.CharField(_("brand"), max_length=256)
     product_code = models.CharField(_("Product code"), max_length=256)
     product_count = models.IntegerField(_("product count"), default=0)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
+        if not self.slug or self.title != Product.objects.get(id=self.id).title:  
             self.slug = slugify(self.title)
-            super().save(*args, **kwargs)
-    
+        super().save(*args, **kwargs)
     
     class Meta:
         db_table = "product"
@@ -96,3 +91,17 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+    
+class Order(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    sale_count = models.PositiveIntegerField()
+    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    sale_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Order for {self.product.title} - {self.sale_count} units on {self.sale_date}"
+    
+    class Meta:
+        db_table = "order"
+        verbose_name = _("order")
+        verbose_name_plural = _("orders")

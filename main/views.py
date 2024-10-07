@@ -153,7 +153,7 @@ class Ecom_Product_DetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["related_projects"] = models.Product.objects.filter(
+        context["related_products"] = models.Product.objects.filter(
                 ~Q(slug=self.kwargs["slug"]), categories__in=self.get_object().categories.all()
                 )[:4]
 
@@ -164,13 +164,7 @@ class Ecom_Product_GridView(View):
     def get(self, request):
         
         return render(request, 'apps/shop/ecom-product-grid.html')
-    
 
-class Ecom_Product_OrderView(View):
-    def get(self, request):
-        
-        return render(request, 'apps/shop/ecom-product-order.html')
-    
 
 class Email_ComposeView(View):
     def get(self, request):
