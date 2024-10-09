@@ -1,10 +1,14 @@
 from django.views.generic import ListView, CreateView, UpdateView
-from helpers.views import  DeleteView
-
-from django.shortcuts import redirect, get_object_or_404
-from main.models import Product
+from django.views import View
+from helpers.views import DeleteView
+from django.shortcuts import render, redirect, get_object_or_404
+from main.models import Product, Order
 from django.urls import reverse_lazy, reverse
 from .forms import ProductForm
+from django.utils.text import slugify
+from django.contrib import messages
+from django.utils import timezone
+
 
 class ProductListView(ListView):
     model = Product
@@ -27,33 +31,64 @@ class ProductCreateView(CreateView):
     template_name = "apps/shop/product/add-product.html"
     context_object_name = "object"
     success_url = reverse_lazy("main:product-list")
+    
 
-
-                
 class ProductUpdateView(UpdateView):
     model = Product
-    template_name = "apps/shop/product/update-product.html"
     form_class = ProductForm
-    slug_field = 'slug'
-    slug_url_kwarg = 'slug'
-    
-    def get_success_url(self):
-        return reverse_lazy('main:product-update', kwargs={'slug': self.object.slug})
+    template_name = "apps/shop/product/update-product.html"
+    context_object_name = "object"
+    success_url = reverse_lazy("main:product-list") 
+
+    def form_valid(self, form):
+        form.instance.slug = slugify(form.instance.title)
+        return super().form_valid(form)
+                       
 
 class ProductDeleteView(DeleteView):
     model = Product
-    template_name = 'main/product_confirm_delete.html'
-    slug_field = 'slug'
-    slug_url_kwarg = 'slug'
-    success_url = reverse_lazy('product-list')
+    success_url = "main:product-list"
 
 
-def product_sale(request, pk):
-    product = get_object_or_404(Product, pk=pk)
+class ProductSaleView(View):
+    def post(self, request, pk):
+        product = get_object_or_404(Product, pk=pk)
+        
+        try:
+            sale_count = int(request.POST.get('num', 1))
+        except ValueError:
+            sale_count = 1
 
-    if product.product_count > 0:
-        product.product_count -= 1
-        product.save()
+        if sale_count <= 0:
+            return render(request, 'pages/error.page-error-400.html', {'error': 'Mahsulot miqdori manfiy yoki nol bo\'lmasligi kerak'})
 
-    return redirect(reverse('main:product-list'))
+        if product.product_count >= sale_count:
+            product.product_count -= sale_count
+            product.save()
 
+            total_price = product.price * sale_count
+            Order.objects.create(
+                product=product,
+                sale_count=sale_count,
+                total_price=total_price,
+                sale_date=timezone.now()
+            )
+
+            messages.success(request, f"{sale_count} dona {product.title} sotildi. Umumiy narx: {total_price} so'm")
+        else:
+            return render(request, 'pages/error.page-error-400.html', {'error': 'Stokda yetarli mahsulot mavjud emas'})
+
+        return redirect(reverse('main:product-list'))
+
+class OrderListView(ListView):
+    model = Order
+    template_name = 'apps/shop/product/product-order.html'
+    context_object_name = 'orders'
+    ordering = ['-sale_date']
+
+
+# class ProductListView(ListView):
+#     model = Product
+#     template_name = 'dashboard/products.html'
+#     context_object_name = 'products'
+#     ordering = ['-id']  

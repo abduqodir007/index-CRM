@@ -57,17 +57,18 @@
                                         <div class="new-arrival-content position-relative">
                                             <h4><a href="{% url 'main:ecom-product-detail' product.slug %}">{{product.title}}</a></h4>
                                             <div class="comment-review star-rating">
-                        
                                                 <span class="review-text">Mahsulot Soni - {{ product.product_count }} ta </span>
                                                 <p class="price">{{product.price}} So'm</p>
                                             </div>
+                                            <p class="price btn btn-danger"><a href="{% url 'main:product-delete' product.pk %}">O'chirish</a></p>
                                             <p>Availability: <span class="item">{{ product.published_date }}<i class="fa fa-check-circle text-success"></i></span></p>
                                             <p>Product code: <span class="item">{{product.product_code}}</span> </p>
                                             <p>Brand: <span class="item">{{product.brand}}</span></p>
                                             <p class="text-content">{{product.description}}</p>
+                                            <div>
                                             <a class="btn btn-primary" href="{% url 'main:ecom-product-detail' product.slug %}">Mahsulotni Ko'rish</a>
-                                                <a class="btn btn-primary" href="{% url 'main:product-update' product.slug %}">O'zgartirish</a>
-                                                <a class="btn btn-primary" href="{% url 'main:product-delete' product.slug %}">Delete</a>
+                                            <a class="btn btn-primary" href="{% url 'main:product-update' product.pk %}">O'zgartirish</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
