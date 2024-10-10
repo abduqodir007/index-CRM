@@ -75,9 +75,11 @@ class Product(models.Model):
     is_top = models.BooleanField(_("project is top"), default=False)
     published_date = models.DateField(_("published date"), auto_now_add=True)
     price = models.DecimalField(_("Narhi"), max_digits=10, decimal_places=2)
+    cost_price = models.DecimalField(_("Xarajat narxi"), max_digits=10, decimal_places=2)
     brand = models.CharField(_("brand"), max_length=256)
     product_code = models.CharField(_("Product code"), max_length=256)
     product_count = models.IntegerField(_("product count"), default=0)
+    created_at = models.DateTimeField(_("created_at"), auto_now_add=True)
 
     def save(self, *args, **kwargs):
         if not self.slug or self.title != Product.objects.get(id=self.id).title:  

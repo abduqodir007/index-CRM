@@ -6,8 +6,8 @@ app_name = "main"
 
 
 urlpatterns = [
-        path("", views.HomeView.as_view(), name="home"),
-        path("home2/", views.Home2View.as_view(), name="home2"),
+        path('', views.DashboardView.as_view(), name="home"),
+        path("home2", views.Home2View.as_view(), name="home2"),
         path("home3/", views.Home3View.as_view(), name="home3"),
         path("home4/", views.Home4View.as_view(), name="home4"),
         path("home5/", views.Home5View.as_view(), name="home5"),

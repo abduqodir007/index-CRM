@@ -31,6 +31,7 @@
 		<!--**********************************
             Content body start
         ***********************************-->
+
         <div class="content-body">
 			<div class="container-fluid">
 				<div class="row">
@@ -235,22 +236,25 @@
 
 										</div>
 									</div>
+
+
+
 									<div class="col-xl-8">
 										<div class="card overflow-hidden">
 											<div class="card-header border-0 pb-0 flex-wrap">
-												<h4 class="heading mb-0">Projects Overview</h4>
+												<h4 class="heading mb-0">Mahsulotlar Hisobi</h4>
 												<ul class="nav nav-pills mix-chart-tab" id="pills-tab" role="tablist">
 												  <li class="nav-item" role="presentation">
-													<button class="nav-link active" data-series="week" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab"  aria-selected="true">Week</button>
+													<button class="nav-link active" data-series="week" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab"  aria-selected="true">Haftalik</button>
 												  </li>
 												  <li class="nav-item" role="presentation">
-													<button class="nav-link" data-series="month" id="pills-month-tab" data-bs-toggle="pill" data-bs-target="#pills-month" type="button" role="tab"  aria-selected="false">Month</button>
+													<button class="nav-link" data-series="month" id="pills-month-tab" data-bs-toggle="pill" data-bs-target="#pills-month" type="button" role="tab"  aria-selected="false">Oylik</button>
 												  </li>
 												  <li class="nav-item" role="presentation">
-													<button class="nav-link" data-series="year" id="pills-year-tab" data-bs-toggle="pill" data-bs-target="#pills-year" type="button" role="tab"  aria-selected="false">Year</button>
+													<button class="nav-link" data-series="year" id="pills-year-tab" data-bs-toggle="pill" data-bs-target="#pills-year" type="button" role="tab"  aria-selected="false">Yillik</button>
 												  </li>
 												   <li class="nav-item" role="presentation">
-													<button class="nav-link" data-series="all" id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" type="button" role="tab" aria-selected="false">All</button>
+													<button class="nav-link" data-series="all" id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" type="button" role="tab" aria-selected="false">Hammasi</button>
 												  </li>
 												</ul>
 											</div>
@@ -258,25 +262,28 @@
 													<div id="overiewChart"></div>
 												<div class="ttl-project">
 													<div class="pr-data">
-														<h5>12,721</h5>
-														<span>Number of Projects</span>
+														<h5>{{ remaining_products }}</h5>
+														<span>Mahsulotlar Soni</span>
 													</div>
 													<div class="pr-data">
-														<h5 class="text-primary">721</h5>
-														<span>Active Projects</span>
+														<h5 class="text-primary">{{ total_sold_count }}</h5>
+														<span>Sotilgan Mahsulotlar Soni</span>
 													</div>
 													<div class="pr-data">
-														<h5>$2,50,523</h5>
-														<span>Revenue</span>
+														<h5>{{ total_spent }} so'm</h5>
+														<span>Mahsulotlar Hisobi</span>
 													</div>
 													<div class="pr-data">
-														<h5 class="text-success">12,275h</h5>
-														<span>Working Hours</span>
+														<h5 class="text-success">{{ yearly_profit }} so'm </h5>
+														<span>Umumiy Foyda</span>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
+
+
+
 									<div class="col-xl-4">
 										<div class="card">
 											<div class="card-header border-0 flex-wrap">
@@ -1131,7 +1138,55 @@
 								</div>
 							</div>
 						</div>
+								<!-- dashboard.html -->
+						<h1>Dashboard</h1>
 
+						<h2>Mahsulotlar:</h2>
+						<p>Kunning mahsulotlari: {{ daily_products }}</p>
+						<p>Haftaning mahsulotlari: {{ weekly_products }}</p>
+						<p>Oyning mahsulotlari: {{ monthly_products }}</p>
+						<p>Yilning mahsulotlari: {{ yearly_products }}</p>
+
+						<h2>Sotuvlar:</h2>
+						<p>Kunning sotuvlari: {{ daily_sales }} so'm</p>
+						<p>Haftaning sotuvlari: {{ weekly_sales }} so'm</p>
+						<p>Oyning sotuvlari: {{ monthly_sales }} so'm</p>
+						<p>Yilning sotuvlari: {{ yearly_sales }} so'm</p>
+
+						<h2>Umumiy tushgan foyda:</h2>
+						<p>Umumiy foyda: {{ total_revenue }} so'm</p>
+
+						<p>Kunlik savdo: {{ daily_sales }} so'm</p>
+						<h1 class="boshqa">Bu Boshqa</h1>
+						<p>Kunlik foyda: {{ daily_profit }} so'm</p>
+
+						<p>Haftalik savdo: {{ weekly_sales }} so'm</p>
+						<p>Haftalik foyda: {{ weekly_profit }} so'm</p>
+
+						<p>Oylik savdo: {{ monthly_sales }} so'm</p>
+						<p>Oylik foyda: {{ monthly_profit }} so'm</p>
+
+						<p>Yillik savdo: {{ yearly_sales }} so'm</p>
+						<p>Yillik foyda: {{ yearly_profit }} so'm</p>
+
+						<p>Umumiy tushum: {{ total_revenue }} so'm</p>
+						<h1 class="nechtaligi">nechta counti</h1>
+						<p>Kunlik savdo: {{ daily_sales }} so'm</p>
+						<p>Kunlik sotilgan mahsulotlar: {{ daily_sold_count }} dona</p>
+
+						<p>Haftalik savdo: {{ weekly_sales }} so'm</p>
+						<p>Haftalik sotilgan mahsulotlar: {{ weekly_sold_count }} dona</p>
+
+						<p>Oylik savdo: {{ monthly_sales }} so'm</p>
+						<p>Oylik sotilgan mahsulotlar: {{ monthly_sold_count }} dona</p>
+
+						<p>Yillik savdo: {{ yearly_sales }} so'm</p>
+						<p>Yillik sotilgan mahsulotlar: {{ yearly_sold_count }} dona</p>
+
+						<p>Umumiy tushum: {{ total_revenue }} so'm</p>
+						<p>Umumiy sarflangan summa: {{ total_spent }} so'm</p>
+						<p>Omborda qolgan mahsulotlar soni: {{ remaining_products }} dona</p>
+						<p>Umumiy sotilgan mahsulotlar: {{ total_sold_count }} dona</p>
 					</div>
 				</div>
 			</div>

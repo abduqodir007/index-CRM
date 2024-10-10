@@ -1,4 +1,5 @@
 from django.views.generic import ListView, CreateView, UpdateView
+from datetime import timedelta
 from django.views import View
 from helpers.views import DeleteView
 from django.shortcuts import render, redirect, get_object_or_404
@@ -8,6 +9,7 @@ from .forms import ProductForm
 from django.utils.text import slugify
 from django.contrib import messages
 from django.utils import timezone
+from django.db.models import Sum, Count
 
 
 class ProductListView(ListView):
@@ -85,10 +87,4 @@ class OrderListView(ListView):
     template_name = 'apps/shop/product/product-order.html'
     context_object_name = 'orders'
     ordering = ['-sale_date']
-
-
-# class ProductListView(ListView):
-#     model = Product
-#     template_name = 'dashboard/products.html'
-#     context_object_name = 'products'
-#     ordering = ['-id']  
+    

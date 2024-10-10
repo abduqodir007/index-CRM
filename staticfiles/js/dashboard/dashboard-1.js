@@ -360,9 +360,9 @@
 			var lineData = [];
 			switch(seriesType) {
 				case "week":
-					columnData = [75, 85, 72, 100, 50, 100, 80, 75, 95, 35, 75,100];
-					areaData = [44, 65, 55, 75, 45, 55, 40, 60, 75, 45, 50,42];
-					lineData = [30, 25, 45, 30, 25, 35, 20, 45, 35, 20, 35,20];
+					columnData = [100, 85, 72, 100, 50, 100, 80, 75, 95, 35, 75,100];
+					areaData = [100, 65, 55, 75, 45, 55, 40, 60, 75, 45, 50,42];
+					lineData = [100, 25, 45, 30, 25, 35, 20, 45, 35, 20, 35,20];
 					break;
 				case "month":
 					columnData = [20, 50, 80, 52, 10, 80, 50, 30, 95, 10, 60,85];
@@ -772,9 +772,87 @@
 		}
 	})
 }
+
+
+
+// NewExperience statistikasini olish uchun
+function loadNewExperienceStats() {
+    $.ajax({
+        url: '/stats/new-experience/',
+        type: 'GET',
+        success: function(response) {
+            $('#new-experience-count').text(response.new_experience_count);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+// AllProject statistikasini olish uchun
+function loadAllProjectsStats() {
+    $.ajax({
+        url: '/stats/all-projects/',
+        type: 'GET',
+        success: function(response) {
+            $('#total-projects-count').text(response.total_projects);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+// Expenses statistikasini olish uchun
+function loadExpensesStats() {
+    $.ajax({
+        url: '/stats/expenses/',
+        type: 'GET',
+        success: function(response) {
+            $('#total-expenses').text(response.total_expenses);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+// Sahifa yuklanganda barcha statistik ma'lumotlarni yuklash
+$(document).ready(function() {
+    loadNewExperienceStats();
+    loadAllProjectsStats();
+    loadExpensesStats();
+});
 	
 	
-	
+function loadChartBarData() {
+    $.ajax({
+        url: '/stats/chart-bar-data/',
+        type: 'GET',
+        success: function(response) {
+            // response orqali chart.js ga ma'lumotlarni uzatasiz
+            var ctx = document.getElementById('chartBar').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: response.labels,
+                    datasets: [{
+                        label: 'Expenses',
+                        data: response.data
+                    }]
+                }
+            });
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+// Sahifa yuklanganda chartni yuklash
+$(document).ready(function() {
+    loadChartBarData();
+});
 	
 	
 	
