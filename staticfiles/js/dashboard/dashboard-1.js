@@ -1,4 +1,4 @@
-
+console.log(labels, salesData, revenueData);
 
 (function($) {
     /* "use strict" */

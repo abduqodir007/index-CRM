@@ -7,7 +7,7 @@ app_name = "main"
 
 urlpatterns = [
         path('', views.DashboardView.as_view(), name="home"),
-        path("home2", views.Home2View.as_view(), name="home2"),
+        # path("home2/", views.Home2View.as_view(), name="home2"),
         path("home3/", views.Home3View.as_view(), name="home3"),
         path("home4/", views.Home4View.as_view(), name="home4"),
         path("home5/", views.Home5View.as_view(), name="home5"),
@@ -43,4 +43,5 @@ urlpatterns = [
         path("product/", include("main.product.urls")),
         path("category-tag/", include("main.category-tag.urls")),
         path("ecom-product-detail/<slug:slug>/", views.Ecom_Product_DetailView.as_view(), name="ecom-product-detail"),
+
 ]

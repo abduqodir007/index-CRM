@@ -6,6 +6,78 @@ from django.db.models import Q, Count, Sum
 from django.utils import timezone
 from datetime import timedelta
 from main.models import Product, Order
+from django.http import JsonResponse
+from django.utils.safestring import mark_safe
+import json
+from decimal import Decimal
+
+# class DashboardView(TemplateView):
+#     template_name = 'dashboard/index.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+        
+#         today = timezone.now().date()
+#         week_start = today - timedelta(days=today.weekday())
+#         year_start = today.replace(month=1, day=1)
+
+#         # Oylik sotuvlar statistikasi
+#         monthly_sales_data = []
+#         monthly_revenue_data = []
+#         monthly_order_counts = []
+
+#         for month in range(1, 13):
+#             sales_in_month = Order.objects.filter(sale_date__month=month).aggregate(total_sales=Sum('sale_count'))['total_sales'] or 0
+#             revenue_in_month = Order.objects.filter(sale_date__month=month).aggregate(total_revenue=Sum('total_price'))['total_revenue'] or Decimal(0)
+#             orders_in_month = Order.objects.filter(sale_date__month=month).count()
+
+#             monthly_sales_data.append(sales_in_month)
+#             monthly_revenue_data.append(float(revenue_in_month))
+#             monthly_order_counts.append(orders_in_month)
+
+#         # Haftalik sotuvlar statistikasi
+#         weekly_sales_data = []
+#         weekly_revenue_data = []
+#         weekly_order_counts = []
+
+#         for i in range(0, 7):
+#             day = week_start + timedelta(days=i)
+#             sales_in_day = Order.objects.filter(sale_date__date=day).aggregate(total_sales=Sum('sale_count'))['total_sales'] or 0
+#             revenue_in_day = Order.objects.filter(sale_date__date=day).aggregate(total_revenue=Sum('total_price'))['total_revenue'] or Decimal(0)
+#             orders_in_day = Order.objects.filter(sale_date__date=day).count()
+
+#             weekly_sales_data.append(sales_in_day)
+#             weekly_revenue_data.append(float(revenue_in_day))
+#             weekly_order_counts.append(orders_in_day)
+
+#         # Yillik sotuvlar statistikasi
+#         yearly_sales_data = []
+#         yearly_revenue_data = []
+#         yearly_order_counts = []
+
+#         for month in range(1, 13):
+#             sales_in_month = Order.objects.filter(sale_date__month=month, sale_date__year=today.year).aggregate(total_sales=Sum('sale_count'))['total_sales'] or 0
+#             revenue_in_month = Order.objects.filter(sale_date__month=month, sale_date__year=today.year).aggregate(total_revenue=Sum('total_price'))['total_revenue'] or Decimal(0)
+#             orders_in_month = Order.objects.filter(sale_date__month=month, sale_date__year=today.year).count()
+
+#             yearly_sales_data.append(sales_in_month)
+#             yearly_revenue_data.append(float(revenue_in_month))
+#             yearly_order_counts.append(orders_in_month)
+
+#         # Kontekstga qo'shish
+#         context['monthly_sales_data'] = monthly_sales_data
+#         context['monthly_revenue_data'] = monthly_revenue_data
+#         context['monthly_order_counts'] = monthly_order_counts
+
+#         context['weekly_sales_data'] = weekly_sales_data
+#         context['weekly_revenue_data'] = weekly_revenue_data
+#         context['weekly_order_counts'] = weekly_order_counts
+
+#         context['yearly_sales_data'] = yearly_sales_data
+#         context['yearly_revenue_data'] = yearly_revenue_data
+#         context['yearly_order_counts'] = yearly_order_counts
+
+#         return context
 
 
 class DashboardView(TemplateView):
@@ -18,13 +90,11 @@ class DashboardView(TemplateView):
         month_start = today.replace(day=1)
         year_start = today.replace(month=1, day=1)
 
-        # Productlar bo'yicha hisoblash
         context['daily_products'] = Product.objects.filter(created_at__date=today).count()
         context['weekly_products'] = Product.objects.filter(created_at__date__gte=week_start).count()
         context['monthly_products'] = Product.objects.filter(created_at__date__gte=month_start).count()
         context['yearly_products'] = Product.objects.filter(created_at__date__gte=year_start).count()
 
-        # Sotilgan productlar va ularning foydasini hisoblash
         daily_sales = Order.objects.filter(sale_date__date=today)
         context['daily_sales'] = daily_sales.aggregate(Sum('total_price'))['total_price__sum'] or 0
         context['daily_sold_count'] = daily_sales.aggregate(Sum('sale_count'))['sale_count__sum'] or 0        
@@ -56,55 +126,11 @@ class DashboardView(TemplateView):
         )
 
         context['total_revenue'] = Order.objects.aggregate(Sum('total_price'))['total_price__sum'] or 0
-
         context['total_spent'] = Order.objects.aggregate(Sum('total_price'))['total_price__sum'] or 0
         context['total_sold_count'] = Order.objects.aggregate(Sum('sale_count'))['sale_count__sum'] or 0
         context['remaining_products'] = Product.objects.aggregate(Sum('product_count'))['product_count__sum'] or 0
 
-
         return context
-
-from django.http import JsonResponse
-from django.utils import timezone
-from datetime import timedelta
-
-def get_statistics(request):
-    today = timezone.now().date()
-    week_start = today - timedelta(days=today.weekday())
-    month_start = today.replace(day=1)
-    year_start = today.replace(month=1, day=1)
-
-    # Statistika ma'lumotlari
-    stats_type = request.GET.get('type')
-    data = {}
-
-    if stats_type == 'week':
-        weekly_sales = Order.objects.filter(sale_date__date__gte=week_start)
-        data['sales'] = weekly_sales.aggregate(Sum('total_price'))['total_price__sum'] or 0
-        data['sold_count'] = weekly_sales.aggregate(Sum('sale_count'))['sale_count__sum'] or 0
-    elif stats_type == 'month':
-        monthly_sales = Order.objects.filter(sale_date__date__gte=month_start)
-        data['sales'] = monthly_sales.aggregate(Sum('total_price'))['total_price__sum'] or 0
-        data['sold_count'] = monthly_sales.aggregate(Sum('sale_count'))['sale_count__sum'] or 0
-    elif stats_type == 'year':
-        yearly_sales = Order.objects.filter(sale_date__date__gte=year_start)
-        data['sales'] = yearly_sales.aggregate(Sum('total_price'))['total_price__sum'] or 0
-        data['sold_count'] = yearly_sales.aggregate(Sum('sale_count'))['sale_count__sum'] or 0
-    else:
-        # Kunlik statistika
-        daily_sales = Order.objects.filter(sale_date__date=today)
-        data['sales'] = daily_sales.aggregate(Sum('total_price'))['total_price__sum'] or 0
-        data['sold_count'] = daily_sales.aggregate(Sum('sale_count'))['sale_count__sum'] or 0
-
-    return JsonResponse(data)
-
-
-
-class Home2View(View):
-    def get(self, request):
-        
-        return render(request, 'dashboard/index-2.html')
-    
 
 class Home3View(View):
     def get(self, request):
